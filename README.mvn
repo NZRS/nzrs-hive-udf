@@ -1,0 +1,5 @@
+To prepare an archetype for Hive UDF, use
+
+mvn archetype:generate -DgroupId=nz.net.nzrs.hive.udf \
+ -DartifactId=<UDF_NAME> -DarchetypeArtifactId=maven-archetype-quickstart \
+ -DinteractiveMode=false
