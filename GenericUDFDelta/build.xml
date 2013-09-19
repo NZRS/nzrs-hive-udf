@@ -1,0 +1,8 @@
+<project name="nzrs-hive-udf" default="package">
+  <property name="plugin.libname" value="nzrs-hive-udf"/>
+  <property name="plugin.title" value="generic-udf-delta"/>
+  <property name="plugin.version" value="0.1"/>
+  <property name="plugin.vendor" value=".nz Registry Services"/>
+  <property name="function.sql.prefix" value="nzrs_"/>
+  <import file="${hive.install.dir}/scripts/pdk/build-plugin.xml"/>
+</project>
