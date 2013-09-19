@@ -16,7 +16,7 @@ import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorUtils;
 import org.apache.hadoop.hive.serde2.objectinspector.ObjectInspectorUtils.ObjectInspectorCopyOption;
 import org.apache.hadoop.hive.serde2.objectinspector.primitive.PrimitiveObjectInspectorFactory;
 import org.apache.hadoop.io.LongWritable;
-import org.apache.hadoop.io.DoubleWritable;
+import org.apache.hadoop.hive.serde2.io.DoubleWritable;
 
 /**
  * GenericUDFDelta
@@ -72,9 +72,6 @@ public class GenericUDFDelta extends GenericUDF {
         throw new UDFArgumentTypeException(1, "Only numeric type arguments are accepted but " + arguments[1].getTypeName() + " is provided.");
     }
     
-    longPrevValue.set(0);
-    doublePrevValue.set(0);
-
     hashOI = arguments[0];
     valueOI = arguments[1];
 
