@@ -1,0 +1,40 @@
+- address: fe80::250:56ff:fec0:1
+  prefix: fe80::/64
+  result: true
+  description: Local-link, covering prefix
+- address: 2001:db8:122::c000:2:2100
+  prefix: 2001:db8:122::/48
+  result: true
+  description: Non-compressed address with covering prefix 
+- address: 2001:0000:1234:0000:0000:C1C0:ABCD:087-
+  prefix: fe80::/64
+  result: false
+  description: Junk address
+- address: ::1
+  prefix: fe80::/128
+  result: false
+  description: Non-matching prefix
+- address: ::1
+  prefix: fe80::/129
+  result: false
+  description: Wrong number of bits on mask
+- address: 2001::1
+  prefix: 2001::1/128
+  result: true
+  description: Host-matching prefix
+- address: 2001::1
+  prefix: 2001::1
+  result: false
+  description: Badly-formed prefix
+- address: 2001:db8:122:344::192.0.2.33
+  prefix: 2001:db8:122:344::/96
+  result: true
+  description: IPv4-mapped address 
+- address: FF01::101
+  prefix: ::/0
+  result: true
+  description: Multicast compress with default route
+- address: ::FFFF:129.144.52.38
+  prefix: ::/0
+  result: false
+  description: IPv4-mapped IPv6 address with default route
