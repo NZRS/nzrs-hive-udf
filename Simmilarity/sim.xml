@@ -1,0 +1,7 @@
+<dependency>
+<groupId>uk.ac.shef.wit</groupId>
+<artifactId>simmetrics</artifactId>
+<version>1.6.2</version>
+<scope>system</scope>
+<systemPath>${basedir}/lib/simmetrics.jar</systemPath>
+</dependency>
