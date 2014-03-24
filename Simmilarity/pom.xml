@@ -4,7 +4,7 @@
   <groupId>nz.net.nzrs.hive.udf</groupId>
   <artifactId>Simmilarity</artifactId>
   <packaging>jar</packaging>
-  <version>0.1</version>
+  <version>0.1.1</version>
   <name>Simmilarity</name>
   <url>http://maven.apache.org</url>
   <dependencies>
