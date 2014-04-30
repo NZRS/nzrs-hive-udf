@@ -3,6 +3,7 @@ package nz.net.nzrs.hive.udf;
 import com.googlecode.ipv6.IPv6Address;
 import org.apache.commons.validator.routines.InetAddressValidator;
 import org.apache.hadoop.hive.ql.exec.UDF;
+import org.apache.hadoop.hive.ql.exec.Description;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 
@@ -12,6 +13,13 @@ import org.apache.hadoop.io.Text;
  * it's an IPv4 address, 6 if it's IPv6 address, 0 otherwise
  *
  */
+
+@Description(
+  name="addressFamily",
+  value="returns 4 if the address is IPv4, 6 if the address is IPv6,"+
+  "0 otherwise", 
+  extended="SELECT addressFamily(address) from foo limit 1;"
+)
 
 public final class addressFamily extends UDF
 {
