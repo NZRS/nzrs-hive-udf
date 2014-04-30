@@ -1,0 +1,114 @@
+- address: 127.0.0.1
+  result: "4"
+  description: IPv4 localhost address
+- address: 10.20.30.40
+  result: "4"
+  description: IPv4 reserved address
+- address: 10.20.30.40.50
+  result: "0"
+  description: "Non-IPv4: extra octet"
+- address: 10.20.30
+  result: "0"
+  description: "Non-IPv4: missing octet"
+- address: 10.20.30,50
+  result: "0"
+  description: "Non-IPv4: bad format"
+- address: 256.1.5.1
+  result: "0"
+  description: "Non-IPv4: bad octet"
+- address: www.nzrs.net.nz
+  result: "0"
+  description: Hostname, not an IP address
+- address: "2001:db8::1"
+  result: "6"
+  description: IPv6 address, valid short version
+- address: "2001:dce:0:11:221:ccff:fe4a:ab36"
+  result: "6"
+  description: IPv6 address, valid long version
+- address: "fe80::221:ccff:fe4a:ab36"
+  result: "6"
+  description: IPv6 address, valid link-local
+- address: "::1"
+  result: "6"
+  description: IPv6 address, valid localhost, short version
+- address: "2001:db8:0:0:0::1"
+  result: "6"
+  description: IPv6 address, valid shortened
+- address: "2001:db8:0::0::1"
+  result: "0"
+  description: IPv6 address, invalid. compression can be used once
+- address: "2001:db8:aaaa:bbbb:cccc:dddd:eeee:AAAA"
+  result: "6"
+  description: IPv6 address, valid. Mixed case
+- address: "0:0:0:0:0:0:0:1"
+  result: "6"
+  description: IPv6 address, valid. loopback full
+- address: "FF01:0:0:0:0:0:0:101"
+  result: "6"
+  description: IPv6 address, valid. Multicast, full
+- address: "2001:0000:1234:0000:0000:C1C0:ABCD:0876"
+  result: "6"
+  description: IPv6 address, valid. Extra 0s
+- address: "02001:0000:1234:0000:0000:C1C0:ABCD:0876"
+  result: "0"
+  description: IPv6 address, invalid. Trailing 0
+- address: "2001:0000:1234:0000:00001:C1C0:ABCD:0876"
+  result: "0"
+  description: IPv6 address, invalid. Trailing 0
+- address: " 2001:0000:1234:0000:0000:C1C0:ABCD:0876"
+  result: "0"
+  description: IPv6 address, invalid. Leading space
+- address: " 2001:0000:1234:0000:0000:C1C0:ABCD:0876  "
+  result: "0"
+  description: IPv6 address, invalid. Leading and trailing space
+- address: "2001:0000:1234:0000:0000:C1C0:ABCD:0876  0"
+  result: "0"
+  description: IPv6 address, invalid. Junk after address
+- address: "2001:0000:1234: 0000:0000:C1C0:ABCD:0876"
+  result: "0"
+  description: IPv6 address, invalid. Space in the middle
+- address: "3ffe:0b00:0000:0001:0000:0000:000a"
+  result: "0"
+  description: IPv6 address, invalid. Seven segments
+- address: "FF02:0000:0000:0000:0000:0000:0000:0000:0001"
+  result: "0"
+  description: IPv6 address, invalid. Nine segments
+- address: "::1111:2222:3333:4444:5555:6666::"
+  result: "0"
+  description: IPv6 address, invalid. Double '::'
+- address: "2002::"
+  result: "6"
+  description: IPv6 address, valid. 
+- address: "2001:db8::"
+  result: "6"
+  description: IPv6 address, valid. 
+- address: "2001:0db8:1234::"
+  result: "6"
+  description: IPv6 address, valid. 
+- address: "':10.0.0.1"
+  result: "0"
+  description: IPv6 address, invalid. Rubbish
+- address: "1:2:3:4:5:6:1.2.3.4"
+  result: "6"
+  description: IPv6 address, valid. IPv4-mapped
+- address: "1:2:3:4:5::1.2.3.4"
+  result: "6"
+  description: IPv6 address, valid. IPv4-mapped compressed
+- address: "fe80::217:f2ff:254.7.237.98"
+  result: "6"
+  description: IPv6 address, valid. IPv4-mapped, local-link, compressed
+- address: "::ffff:192.168.1.26"
+  result: "6"
+  description: IPv6 address, valid. IPv4-mapped short
+- address: "0:0:0:0:0:0:13.1.68.3"
+  result: "6"
+  description: IPv6 address, valid. IPv4-compatible IPv6 address, full
+- address: "0:0:0:0:0:FFFF:129.144.52.38"
+  result: "6"
+  description: IPv6 address, valid. IPv4-mapped IPv6 address, full 
+- address: "::13.1.68.3"
+  result: "6"
+  description: IPv6 address, valid. IPv4-compatible IPv6 address, compressed, deprecated 
+- address: "::FFFF:129.144.52.38"
+  result: "6"
+  description: IPv6 address, valid. IPv4-mapped IPv6 address, compressed 

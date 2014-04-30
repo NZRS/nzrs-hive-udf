@@ -26,13 +26,13 @@ public class addressFamilyTest
      * All tests are described in a YAML file, to avoid have to
      * recompile
      */
-    public void testV4addressFamily()
+    public void testAddressFamily()
     {
         IntWritable result = new IntWritable(0);
         Yaml yaml_h = new Yaml();
         try {
             InputStream input = new FileInputStream(new
-                File("src/test/resources/v4-test-cases.yaml"));
+                File("src/test/resources/test-cases.yaml"));
             List<Map<String, Object>> test_cases = (List<Map<String,
             Object>>) yaml_h.load(input);
             Iterator<Map<String, Object>> tc_it = test_cases.iterator();
