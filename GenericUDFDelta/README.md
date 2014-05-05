@@ -2,7 +2,7 @@
 
 If you are running Hive 0.10 or less, you'll be interested on using this
 function. Using a set of grouped values, it will calculate the
-arithmetic different between consecutive values.
+arithmetic difference between consecutive values.
 
 It will work for any primitive numeric type (TINYINT, SMALLINT, INT,
 BIGINT, FLOAT, DOUBLE, DECIMAL)
