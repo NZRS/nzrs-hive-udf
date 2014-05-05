@@ -1,5 +1,4 @@
-nzrs-hive-udf/addressFamily
-===========================
+# nzrs-hive-udf/addressFamily
 
 Provided with a string, it will try to parse it as IPv4 first, and in
 case of failure, as IPv6. It will return 4 (as integer) if the address
@@ -8,9 +7,9 @@ is IPv4, 6 if it is IPv6 or 0 in case of error.
 Depends on Apache Commons Validator for the IPv4 stuff, and Java IPv6
 for the IPv6 stuff. Also requires SnakeYAML for testing
 
-USAGE
-=====
+## USAGE
 
+```
 hive> ADD JAR addressFamily-0.1-jar-with-dependencies.jar;
 Added addressFamily-0.1-jar-with-dependencies.jar to class path
 Added resource: addressFamily-0.1-jar-with-dependencies.jar
@@ -42,4 +41,4 @@ select addr_fam(address), address from addressFamily_test_data;
 6   2001:db8:0:0:0::1
 6   ::1
 6   FF01:0:0:0:0:0:0:101
-
+```
