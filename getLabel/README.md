@@ -18,11 +18,14 @@ target/getLabel-0.1.jar
 3. Copy target/getLabel-0.1.jar to your Hadoop installation
 4. On your .hiverc file add
 
+```
     ADD JAR <JAR_DIR>/getLabel-0.1.jar
     CREATE TEMPORARY FUNCTION get_label as 'nz.net.nzrs.hive.udf.getLabel';
+```
 
 5. In Hive, you now can run
 
+```
     SELECT dns_qname, get_label(dns_qname, "0,1") FROM pcap_test limit 5;
 
     ns2.nameserver.net.nz.  nz.net
@@ -38,4 +41,4 @@ target/getLabel-0.1.jar
     4media.co.nz.   4media
     bedpost.co.nz.  bedpost
     aphrodite.co.nz.    aphrodite
-
+```
