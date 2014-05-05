@@ -3,9 +3,11 @@ This is a UDF that wraps some of the
 [Simmetrics](http://sourceforge.net/projects/simmetrics/) functions.
 There are implementations for:
 
-JaroWinkler
-MongeElkan
-NeedlemanWunch
+* JaroWinkler
+* MongeElkan
+* NeedlemanWunch
+
+Adding the rest of the functions should be straightforward.
 
 # Usage
 
