@@ -27,13 +27,13 @@ SELECT address FROM tmp_prefix_match_data WHERE
 ```
 
 ## Usage (complete example)
-For convenience, some test scripts and data is provided to test.
+For convenience, test script and data are provided.
 
 1. Create a temporary table for the data
 ```
 hive -f src/test/resources/create-prefixmatch-test-data.hql
 ```
-2. Load the data to the table created in the previous table
+2. Load data into table created in the previous step
 ```
 hdfs dfs -copyFromLocal src/test/resources/prefixmatch-data.txt /tmp/test_prefix_match_data
 ```
