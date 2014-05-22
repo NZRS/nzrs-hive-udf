@@ -30,6 +30,12 @@ public final class isValidTld extends UDF
     private Map<String, Boolean> validTld;
 
     public Boolean evaluate(String tld, String tldFile) throws HiveException {
+        if (tldFile == null) {
+            throw new HiveException("NULLFILE");
+        }
+        if (tld == null) {
+            return false;
+        }
         if (validTld == null) {
             validTld = new HashMap<String, Boolean>();
             try {

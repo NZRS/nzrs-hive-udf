@@ -72,6 +72,18 @@ public class isValidTldTest extends TestCase
         assertEquals(result, false);
     }
 
+    public void testNullTld()
+    {
+        try {
+            result = (new isValidTld().evaluate(null, tldlist));
+        }
+        catch(HiveException e) {
+            System.out.println("Test failed!");
+            assertTrue( false );  // Force the test to fail
+        }
+        assertEquals(result, false);
+    }
+
     public void testNonExistentFile()
     {
         try {
@@ -79,6 +91,16 @@ public class isValidTldTest extends TestCase
         }
         catch(HiveException e) {
             assertEquals(e.getMessage().substring(0,12), "FILENOTFOUND");
+        }
+    }
+
+    public void testNullFile()
+    {
+        try {
+            result = (new isValidTld().evaluate("local", null));
+        }
+        catch(HiveException e) {
+            assertEquals(e.getMessage().substring(0,8), "NULLFILE");
         }
     }
 
