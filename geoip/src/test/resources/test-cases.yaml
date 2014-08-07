@@ -1,0 +1,24 @@
+- address: 202.46.183.2
+  field: "COUNTRY_NAME"
+  result: "New Zealand"
+  description: IPv4 from New Zealand
+- address: 72.52.4.91
+  field: "COUNTRY_CODE"
+  result: "US"
+  description: IPv4 address for the BBC
+- address: 192.168.22.240
+  field: "COUNTRY_NAME"
+  result: "NULL"
+  description: Private IPv4
+- address: 149.20.64.69
+  field: "REGION"
+  result: "CA"
+  description: ISC.org website address in California
+- address: 202.162.73.2
+  field: "CITY"
+  result: "NULL"
+  description: TradeMe website address, give me the city
+- address: 202.162.73.2
+  field: "REGION"
+  result: "NULL"
+  description: TradeMe website address, give me the region
