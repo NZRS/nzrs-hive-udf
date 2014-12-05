@@ -78,38 +78,51 @@ public final class GeoIPLookupUDF extends UDF {
             if (ls == null) {
                 ls = new LookupService(datafile.toString(), LookupService.GEOIP_MEMORY_CACHE);
             }
-            Location l = ls.getLocation(ip.toString());
-            if (l == null) {
-                return null;
-            }
             lookupVal = field.toString();
-            if (lookupVal.equals(COUNTRY_NAME)) {
-                return new Text(l.countryName);
-            }
-            else if (lookupVal.equals(COUNTRY_CODE)) {
-                return new Text(l.countryCode);
-            }
-            else if (lookupVal.equals(REGION)) {
-                if (l.region == null) {
+            if (lookupVal.equals(ORG)) {
+                String l = ls.getOrg(ip.toString());
+                if (l == null) {
                     return null;
-                } else {
-                    return new Text(l.region);
                 }
-            }
-            else if (lookupVal.equals(CITY)) {
-                if (l.city == null) {
-                    return null;
-                } else {
-                    return new Text(l.city);
+                else {
+                    /* The usual string will look like
+                     * ASXXXXXX Name of the organization
+                     * Keep just the XXXXX */
+                    return new Text(l.split(" ")[0].substring(2));
                 }
             }
             else {
-                throw new HiveException("INVALID FIELD");
+                Location l = ls.getLocation(ip.toString());
+                if (l == null) {
+                    return null;
+                }
+                if (lookupVal.equals(COUNTRY_NAME)) {
+                    return new Text(l.countryName);
+                }
+                else if (lookupVal.equals(COUNTRY_CODE)) {
+                    return new Text(l.countryCode);
+                }
+                else if (lookupVal.equals(REGION)) {
+                    if (l.region == null) {
+                        return null;
+                    } else {
+                        return new Text(l.region);
+                    }
+                }
+                else if (lookupVal.equals(CITY)) {
+                    if (l.city == null) {
+                        return null;
+                    } else {
+                        return new Text(l.city);
+                    }
+                }
+                else {
+                    throw new HiveException("INVALID FIELD");
+                }
             }
         }
         catch (IOException e) {
             throw new HiveException(e);
         }
     }
-
 }

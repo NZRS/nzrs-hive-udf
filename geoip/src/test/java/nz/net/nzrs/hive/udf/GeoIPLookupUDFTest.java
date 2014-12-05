@@ -17,16 +17,14 @@ import java.lang.String;
 
 public class GeoIPLookupUDFTest extends TestCase {
 
-    final private Text geoip_file = new Text("src/test/resources/GeoIPCity.dat");
 
     /* All tests stored in a YAML file */
 
-    public void testGeoIPLookupUDF() {
+    private void runGeoIPLookupTest(String test_file, String data_file) {
         Text result = null;
         Yaml yaml_h = new Yaml();
         try {
-            InputStream input = new FileInputStream(new
-                File("src/test/resources/test-cases.yaml"));
+            InputStream input = new FileInputStream(new File(test_file));
             List<Map<String, Object>> test_cases = (List<Map<String,
             Object>>) yaml_h.load(input);
             Iterator<Map<String, Object>> tc_it = test_cases.iterator();
@@ -35,7 +33,7 @@ public class GeoIPLookupUDFTest extends TestCase {
                 System.out.println("Testing " + (String)elem.get("description"));
                 result = new GeoIPLookupUDF().evaluate(
                         new Text((String)elem.get("address")),
-                        new Text((String)elem.get("field")), geoip_file);
+                        new Text((String)elem.get("field")), new Text(data_file));
                 System.out.println("  Expected " + elem.get("result") + " got " + result);
                 if (result == null) {
                     assertEquals(elem.get("result"), "NULL");
@@ -50,8 +48,20 @@ public class GeoIPLookupUDFTest extends TestCase {
             assertTrue( false );
         }
         catch (Exception e) {
-            System.out.println("Test failed by exception! " + e.getMessage() );
+            System.out.println("Test failed by exception! " + e );
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            e.printStackTrace(pw);
+            System.out.println(sw.toString());
             assertTrue( false );
         }
+    }
+
+    public void testGeoIPLookup() {
+        runGeoIPLookupTest("src/test/resources/ip-test-cases.yaml", "src/test/resources/GeoIPCity.dat");
+    }
+
+    public void testGeoIPASLookup() {
+        runGeoIPLookupTest("src/test/resources/asn-test-cases.yaml", "src/test/resources/GeoIPASNum.dat");
     }
 }
