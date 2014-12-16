@@ -2,9 +2,6 @@ package nz.net.nzrs.hive.udf;
 
 import com.maxmind.geoip.*;
 import org.apache.hadoop.hive.ql.exec.UDF;
-import org.apache.hadoop.hive.ql.exec.UDFArgumentException;
-import org.apache.hadoop.hive.ql.exec.UDFArgumentLengthException;
-import org.apache.hadoop.hive.ql.exec.UDFArgumentTypeException;
 import org.apache.hadoop.hive.ql.exec.Description;
 
 import org.apache.hadoop.io.Text;
@@ -41,24 +38,15 @@ import java.io.*;
 
 public final class GeoIPLookupUDF extends UDF {
 
-  private String ipString = null;
-  private Long ipLong = null;
-  private String property;
   private LookupService ls;
   private String lookupVal = null;
 
   private static final String COUNTRY_NAME = "COUNTRY_NAME";
   private static final String COUNTRY_CODE = "COUNTRY_CODE";
-  private static final String AREA_CODE    = "AREA_CODE";
   private static final String CITY         = "CITY";
-  private static final String DMA_CODE     = "DMA_CODE";
-  private static final String LATITUDE     = "LATITUDE";
-  private static final String LONGITUDE    = "LONGITUDE";
-  private static final String METRO_CODE   = "METRO_CODE";
-  private static final String POSTAL_CODE  = "POSTAL_CODE";
   private static final String REGION       = "REGION";
+  private static final String ASN          = "ASN";
   private static final String ORG          = "ORG";
-  private static final String ID           = "ID";
 
     public GeoIPLookupUDF() {
         ls = null;
@@ -79,16 +67,19 @@ public final class GeoIPLookupUDF extends UDF {
                 ls = new LookupService(datafile.toString(), LookupService.GEOIP_MEMORY_CACHE);
             }
             lookupVal = field.toString();
-            if (lookupVal.equals(ORG)) {
+            if (lookupVal.equals(ORG) || lookupVal.equals(ASN)) {
                 String l = ls.getOrg(ip.toString());
                 if (l == null) {
                     return null;
                 }
-                else {
+                else if (lookupVal.equals(ASN)) {
                     /* The usual string will look like
                      * ASXXXXXX Name of the organization
                      * Keep just the XXXXX */
                     return new Text(l.split(" ")[0].substring(2));
+                }
+                else {
+                    return new Text(l.substring(l.indexOf(" ")+1));
                 }
             }
             else {

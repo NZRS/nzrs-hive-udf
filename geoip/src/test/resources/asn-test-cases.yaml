@@ -1,20 +1,40 @@
 - address: 202.46.183.2
-  field: "ORG"
+  field: "ASN"
   result: "45809"
   description: IPv4 from New Zealand
-- address: 72.52.4.91
+- address: 202.46.183.2
   field: "ORG"
+  result: "ASN for .nz registry content"
+  description: IPv4 from New Zealand
+- address: 72.52.4.91
+  field: "ASN"
   result: "32787"
   description: IPv4 address for the BBC
+- address: 72.52.4.91
+  field: "ORG"
+  result: "Prolexic Technologies, Inc."
+  description: IPv4 address for the BBC
+- address: 192.168.22.240
+  field: "ASN"
+  result: "NULL"
+  description: Private IPv4
 - address: 192.168.22.240
   field: "ORG"
   result: "NULL"
   description: Private IPv4
 - address: 149.20.64.69
-  field: "ORG"
+  field: "ASN"
   result: "1280"
   description: ISC.org website address in California
+- address: 149.20.64.69
+  field: "ORG"
+  result: "Internet Systems Consortium, Inc."
+  description: ISC.org website address in California
+- address: 202.162.73.2
+  field: "ASN"
+  result: "9834"
+  description: TradeMe website address, give me the city
 - address: 202.162.73.2
   field: "ORG"
-  result: "9834"
+  result: "Trade Me Limited"
   description: TradeMe website address, give me the city

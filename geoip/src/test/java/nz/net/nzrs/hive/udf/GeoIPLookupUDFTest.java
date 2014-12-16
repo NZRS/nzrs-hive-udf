@@ -1,11 +1,8 @@
 package nz.net.nzrs.hive.udf;
 
 import org.apache.hadoop.io.Text;
-import org.apache.hadoop.hive.ql.metadata.HiveException;
 
-import junit.framework.Test;
 import junit.framework.TestCase;
-import junit.framework.TestSuite;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -21,12 +18,11 @@ public class GeoIPLookupUDFTest extends TestCase {
     /* All tests stored in a YAML file */
 
     private void runGeoIPLookupTest(String test_file, String data_file) {
-        Text result = null;
+        Text result;
         Yaml yaml_h = new Yaml();
         try {
             InputStream input = new FileInputStream(new File(test_file));
-            List<Map<String, Object>> test_cases = (List<Map<String,
-            Object>>) yaml_h.load(input);
+            List<Map<String, Object>> test_cases = (List<Map<String, Object>>) yaml_h.load(input);
             Iterator<Map<String, Object>> tc_it = test_cases.iterator();
             while(tc_it.hasNext()) {
                 Map<String, Object> elem = tc_it.next();
