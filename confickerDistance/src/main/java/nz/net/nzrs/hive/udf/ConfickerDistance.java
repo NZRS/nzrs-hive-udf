@@ -16,17 +16,21 @@ import org.apache.hadoop.io.Text;
 
 public class ConfickerDistance extends UDF{
 
-	private static Map<String, Float> confickerDistribution;
+	private Map<String, Float> confickerDistribution;
+	private List<String> tlds;
 	
 	public ConfickerDistance() throws HiveException{
-		String fname = "confickerDistance/src/resources/conficker.txt";
-		fname.replace('/', File.separatorChar);
+		String dir = "confickerDistance/src/resources/";
+		dir.replace('/', File.separatorChar);
+		
+		// read conficker
+		String fname = dir + "conficker.txt";
 		try{
 			File file = new File(fname);
 			FileReader fr = new FileReader(file);
 			BufferedReader br = new BufferedReader(fr);
+			List<String> names = new ArrayList<String>();		
 			String line = null;
-			List<String> names = new ArrayList<String>();			
 			while ((line=br.readLine()) != null){
 				names.add(line);
 			}
@@ -40,6 +44,27 @@ public class ConfickerDistance extends UDF{
 		catch(IOException ie){
 			throw new HiveException("Error parsing " + fname, ie);
 		}
+		
+		// read tlds
+		fname = dir + "tlds.txt";
+		try{
+			File file = new File(fname);
+			FileReader fr = new FileReader(file);
+			BufferedReader br = new BufferedReader(fr);
+			tlds = new ArrayList<String>();
+			String line = null;
+			while ((line=br.readLine()) != null){
+				tlds.add(line);
+			}
+			br.close();
+		}
+		catch(FileNotFoundException fnfe){
+			throw new HiveException("Could not find " + fname, fnfe);
+		}
+		catch(IOException ie){
+			throw new HiveException("Error parsing " + fname, ie);
+		}
+		
 	}
 	
 	protected Map<String, Float> computeNgramProbabilities(List<String> strings, boolean normalise){
