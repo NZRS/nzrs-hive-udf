@@ -14,6 +14,8 @@ import org.apache.hadoop.hive.ql.exec.UDF;
 import org.apache.hadoop.hive.ql.metadata.HiveException;
 import org.apache.hadoop.io.Text;
 
+import com.sun.tools.doclets.internal.toolkit.util.TextTag;
+
 public class ConfickerDistance extends UDF{
 
 	private Map<String, Float> confickerDistribution;
@@ -150,6 +152,7 @@ public class ConfickerDistance extends UDF{
 	
 	public boolean evaluate(final Text input, final float threshold){
 		String string = input.toString();
+		string = stripHlds(string);
 		Map<String, Float> ngrams = computeNgramProbabilities(string, true);
 		return distanceToConficker(ngrams) < threshold;
 	}
@@ -159,7 +162,37 @@ public class ConfickerDistance extends UDF{
 	}
 	
 	public boolean evaluate(final Text input){
-		return evaluate(input, 3f);
+		return evaluate(input, 2f);
+	}
+	
+	/**
+	 * Return the given domain, with the high-level parts of its domain name stripped.
+	 * @param domain: domain to strip
+	 * @return domain with its high-level parts stripped.
+	 */
+	public String stripHlds(String domain){
+		if (domain.length() == 0) return domain;
+		String[] names = domain.split("\\.");
+		int strip = 0;
+		
+		// strip root
+		if (names[names.length-1] == "") strip++; 
+
+		// strip tld and hld
+		if (tlds.contains(names[names.length-1-strip])){
+			strip++;
+			if (tlds.contains(names[names.length-1-strip])){
+				strip++;
+			}
+		}
+		
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < names.length - strip; i++){
+			sb.append(names[i]);
+			sb.append(".");
+		}
+		sb.deleteCharAt(sb.length()-1);
+		return sb.toString();
 	}
 	
 }
