@@ -18,18 +18,6 @@
   <dependencies>
 
     <dependency>
-        <groupId>com.maxmind.geoip</groupId>
-        <artifactId>geoip-api</artifactId>
-        <version>${geoip.version}</version>
-    </dependency>
-
-    <dependency>
-       <groupId>org.yaml</groupId>
-       <artifactId>snakeyaml</artifactId>
-       <version>${yaml.version}</version>
-     </dependency>
-
-    <dependency>
       <groupId>org.apache.hadoop</groupId>
       <artifactId>hadoop-core</artifactId>
       <version>${hadoop.version}</version>
